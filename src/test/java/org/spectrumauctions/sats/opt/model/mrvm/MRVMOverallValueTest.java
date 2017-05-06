@@ -8,7 +8,6 @@ package org.spectrumauctions.sats.opt.model.mrvm;
 import edu.harvard.econcs.jopt.solver.IMIPResult;
 import edu.harvard.econcs.jopt.solver.mip.Variable;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.spectrumauctions.sats.core.bidlang.generic.GenericValue;
 import org.spectrumauctions.sats.core.model.Bundle;
@@ -31,7 +30,7 @@ public class MRVMOverallValueTest {
 
     private boolean hasFailed = false;
     private static boolean LOG_ASSERTS_OF_FAILED_STEP = true;
-    private static boolean LOG_ALL_STAGES = true;
+    private static boolean LOG_ALL_STAGES = false;
 
     @Test
     public void mipValuesEqualSATSValues() {
@@ -185,6 +184,7 @@ public class MRVMOverallValueTest {
 
     /**
      * Doesn't really test anything of the mip (as no gamma variable), but makes sure sats-core is consistent with what mip is supposed to encode
+     *
      * @param result
      * @param joptResult
      * @param bidder
@@ -244,8 +244,8 @@ public class MRVMOverallValueTest {
                 }
             }
             fail();
-        }else{
-            if(LOG_ALL_STAGES){
+        } else {
+            if (LOG_ALL_STAGES) {
                 for (String noerror : errors) {
                     System.out.println(noerror);
                 }

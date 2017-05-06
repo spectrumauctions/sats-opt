@@ -21,7 +21,6 @@ import java.util.Collection;
 
 /**
  * @author Michael Weiss
- *
  */
 public class MRVMNationalBidderPartialMipBigScale {
 
@@ -111,7 +110,6 @@ public class MRVMNationalBidderPartialMipBigScale {
     }
 
     /**
-     *
      * @param wi number of regions covered
      */
     private void testWhat(int wi) {

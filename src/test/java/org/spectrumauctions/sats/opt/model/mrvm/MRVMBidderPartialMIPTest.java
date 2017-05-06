@@ -32,7 +32,6 @@ import static org.junit.Assert.fail;
 
 /**
  * @author Michael Weiss
- *
  */
 public class MRVMBidderPartialMIPTest {
 

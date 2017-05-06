@@ -14,16 +14,18 @@ import edu.harvard.econcs.jopt.solver.mip.MIP;
 import edu.harvard.econcs.jopt.solver.mip.Variable;
 import org.junit.Assert;
 import org.junit.Test;
-import org.spectrumauctions.sats.core.model.mrvm.*;
+import org.spectrumauctions.sats.core.model.mrvm.MRVMBand;
+import org.spectrumauctions.sats.core.model.mrvm.MRVMBidder;
+import org.spectrumauctions.sats.core.model.mrvm.MRVMNationalBidder;
+import org.spectrumauctions.sats.core.model.mrvm.MRVMWorld;
 import org.spectrumauctions.sats.core.util.random.JavaUtilRNGSupplier;
 
 import java.util.Collection;
 
-import static org.spectrumauctions.sats.core.model.mrvm.MRVMRegionsMap.*;
+import static org.spectrumauctions.sats.core.model.mrvm.MRVMRegionsMap.Region;
 
 /**
  * @author Michael Weiss
- *
  */
 public class MRVMNationalBidderPartialMipTest {
 
@@ -108,7 +110,6 @@ public class MRVMNationalBidderPartialMipTest {
     }
 
     /**
-     *
      * @param wi number of regions covered
      */
     private void testWhat(int wi) {
