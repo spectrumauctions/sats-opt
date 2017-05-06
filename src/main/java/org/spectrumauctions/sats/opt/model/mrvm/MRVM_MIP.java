@@ -140,13 +140,13 @@ public class MRVM_MIP implements EfficientAllocator<GenericAllocation<MRVMGeneri
             Variable bidderValueVar = worldPartialMip.getValueVariable(bidder.getKey());
             double mipUtilityResult = mipResult.getValue(bidderValueVar);
             double svScalingFactor = bidder.getValue().getSVScalingFactor();
-            if (svScalingFactor != 1) {
-                System.out.println("Scaling SV Value with factor " + svScalingFactor);
-            }
+//            if (svScalingFactor != 1) {
+//                System.out.println("Scaling SV Value with factor " + svScalingFactor);
+//            }
             double omegaScalingFactor = worldPartialMip.getScalingFactor();
-            if (omegaScalingFactor != 1) {
-                System.out.println("Scaling Omega Value with factor " + omegaScalingFactor);
-            }
+//            if (omegaScalingFactor != 1) {
+//                System.out.println("Scaling Omega Value with factor " + omegaScalingFactor);
+//            }
             double unscaledValue = mipUtilityResult * omegaScalingFactor * svScalingFactor;
             GenericValue.Builder<MRVMGenericDefinition> valueBuilder = new GenericValue.Builder<>(BigDecimal.valueOf(unscaledValue));
             for (Region region : world.getRegionsMap().getRegions()) {

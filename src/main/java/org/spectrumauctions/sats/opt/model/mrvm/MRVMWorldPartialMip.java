@@ -116,6 +116,7 @@ public class MRVMWorldPartialMip extends PartialMIP {
         if ((mip.getLinearObjectiveTerms() != null && mip.getQuadraticObjectiveTerms() != null)
                 || mip.getObjectiveTerms().size() != 0) {
             //TODO Log Warning
+            System.out.println("WARNING: There are already existing objective values, when there's still supposed to be none");
         }
         for (Variable var : valueVariables.values()) {
             mip.addObjectiveTerm(1, var);
