@@ -107,7 +107,7 @@ public class MRVMNationalBidderPartialMipBigScale {
 
     @Test
     public void testWHatWithK5() {
-        testWhat(3);
+        testWhat(5);
     }
 
     /**
@@ -150,7 +150,7 @@ public class MRVMNationalBidderPartialMipBigScale {
         int numberOfUncovered = bidder.getWorld().getRegionsMap().getNumberOfRegions() - wi;
         for (int k = 0; k <= bidder.getKMax(); k++) {
             double varValue = result.getValue(bidderMip.getWHatIKVariable(k));
-            if (k == numberOfUncovered || k == bidder.getKMax()) {
+            if (k == numberOfUncovered || k < numberOfUncovered && k == bidder.getKMax()) {
                 Assert.assertEquals(1, varValue, 0.000001);
             } else if (k == bidder.getKMax() && numberOfUncovered > bidder.getKMax()) {
                 Assert.assertEquals(1, varValue, 0.000001);
