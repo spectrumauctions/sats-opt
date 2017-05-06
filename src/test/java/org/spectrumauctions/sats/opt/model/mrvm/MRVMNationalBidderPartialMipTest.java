@@ -33,13 +33,13 @@ public class MRVMNationalBidderPartialMipTest {
         MRVMWorld world = new MRVMWorld(MRVMWorldGen.getSimpleWorldBuilder(), new JavaUtilRNGSupplier(68543436434L));
         Collection<MRVMBidder> bidders =
                 world.createPopulation(null, null, MRVMWorldGen.getSimpleNationalBidderSetup(), new JavaUtilRNGSupplier(57844354L));
-        double scalingFactor = MRVM_MIP.calculateScalingFactor(bidders);
-        double biggestScaledValue = MRVM_MIP.biggestUnscaledPossibleValue(bidders).doubleValue() / scalingFactor;
-        MRVMWorldPartialMip worldPartialMip = new MRVMWorldPartialMip(bidders, biggestScaledValue, scalingFactor);
+        double scalingFactor = Scalor.scalingFactor(bidders);
+        double biggestScaledValue = Scalor.biggestUnscaledPossibleValue(bidders).doubleValue() / scalingFactor;
+        MRVMWorldPartialMip worldPartialMip = new MRVMWorldPartialMip(bidders, biggestScaledValue);
         worldPartialMip.appendToMip(mip);
         for (MRVMBidder bidder : bidders) {
             if (bidder instanceof MRVMNationalBidder) {
-                MRVMBidderPartialMIP bidderMip = new MRVMNationalBidderPartialMip((MRVMNationalBidder) bidder, 1, worldPartialMip);
+                MRVMBidderPartialMIP bidderMip = new MRVMNationalBidderPartialMip((MRVMNationalBidder) bidder, scalingFactor, worldPartialMip);
                 bidderMip.appendToMip(mip);
             }
         }
@@ -55,9 +55,9 @@ public class MRVMNationalBidderPartialMipTest {
         MRVMWorld world = new MRVMWorld(MRVMWorldGen.getSimpleWorldBuilder(), new JavaUtilRNGSupplier(68543436434L));
         Collection<MRVMBidder> bidders =
                 world.createPopulation(null, null, MRVMWorldGen.getSimpleNationalBidderSetup(), new JavaUtilRNGSupplier(57844354L));
-        double scalingFactor = MRVM_MIP.calculateScalingFactor(bidders);
-        double biggestScaledValue = MRVM_MIP.biggestUnscaledPossibleValue(bidders).doubleValue() / scalingFactor;
-        MRVMWorldPartialMip worldPartialMip = new MRVMWorldPartialMip(bidders, biggestScaledValue, scalingFactor);
+        double scalingFactor = Scalor.scalingFactor(bidders);
+        double biggestScaledValue = Scalor.biggestUnscaledPossibleValue(bidders).doubleValue() / scalingFactor;
+        MRVMWorldPartialMip worldPartialMip = new MRVMWorldPartialMip(bidders, biggestScaledValue);
         MRVMNationalBidder bidder = (MRVMNationalBidder) bidders.iterator().next();
         MRVMNationalBidderPartialMip bidderMip = new MRVMNationalBidderPartialMip(bidder, 1, worldPartialMip);
         int numberOfRegionsInBundle = 2;
@@ -117,9 +117,9 @@ public class MRVMNationalBidderPartialMipTest {
         MRVMWorld world = new MRVMWorld(MRVMWorldGen.getSimpleWorldBuilder(), new JavaUtilRNGSupplier(68543436434L));
         Collection<MRVMBidder> bidders =
                 world.createPopulation(null, null, MRVMWorldGen.getSimpleNationalBidderSetup(), new JavaUtilRNGSupplier(57844354L));
-        double scalingFactor = MRVM_MIP.calculateScalingFactor(bidders);
-        double biggestScaledValue = MRVM_MIP.biggestUnscaledPossibleValue(bidders).doubleValue() / scalingFactor;
-        MRVMWorldPartialMip worldPartialMip = new MRVMWorldPartialMip(bidders, biggestScaledValue, scalingFactor);
+        double scalingFactor = Scalor.scalingFactor(bidders);
+        double biggestScaledValue = Scalor.biggestUnscaledPossibleValue(bidders).doubleValue() / scalingFactor;
+        MRVMWorldPartialMip worldPartialMip = new MRVMWorldPartialMip(bidders, biggestScaledValue);
         MRVMNationalBidder bidder = (MRVMNationalBidder) bidders.iterator().next();
         MRVMNationalBidderPartialMip bidderMip = new MRVMNationalBidderPartialMip(bidder, 1, worldPartialMip);
         // Constrain Wi
@@ -174,11 +174,10 @@ public class MRVMNationalBidderPartialMipTest {
         MIP mip = new MIP();
         mip.setObjectiveMax(true);
         MRVMWorld world = new MRVMWorld(MRVMWorldGen.getSimpleWorldBuilder(), new JavaUtilRNGSupplier(68543436434L));
-        Collection<MRVMBidder> bidders =
-                world.createPopulation(null, null, MRVMWorldGen.getSimpleNationalBidderSetup(), new JavaUtilRNGSupplier(57844354L));
-        double scalingFactor = MRVM_MIP.calculateScalingFactor(bidders);
-        double biggestScaledValue = MRVM_MIP.biggestUnscaledPossibleValue(bidders).doubleValue() / scalingFactor;
-        MRVMWorldPartialMip worldPartialMip = new MRVMWorldPartialMip(bidders, biggestScaledValue, scalingFactor);
+        Collection<MRVMBidder> bidders = world.createPopulation(null, null, MRVMWorldGen.getSimpleNationalBidderSetup(), new JavaUtilRNGSupplier(57844354L));
+        double scalingFactor = Scalor.scalingFactor(bidders);
+        double biggestScaledValue = Scalor.biggestUnscaledPossibleValue(bidders).doubleValue() / scalingFactor;
+        MRVMWorldPartialMip worldPartialMip = new MRVMWorldPartialMip(bidders, biggestScaledValue);
         MRVMNationalBidder bidder = (MRVMNationalBidder) bidders.iterator().next();
         MRVMNationalBidderPartialMip bidderMip = new MRVMNationalBidderPartialMip(bidder, 1, worldPartialMip);
 

@@ -36,20 +36,17 @@ public class MRVMWorldPartialMip extends PartialMIP {
 
     private final Set<MRVMBidder> bidders;
     private final MRVMWorld world;
-    private final double scalingFactor;
 
     /**
      * @param bidders2
      * @param biggestPossibleValue The highest (already scaled) value any bidder could have
-     * @param scalingFactor
      */
-    MRVMWorldPartialMip(Collection<MRVMBidder> bidders2, double biggestPossibleValue, double scalingFactor) {
+    MRVMWorldPartialMip(Collection<MRVMBidder> bidders2, double biggestPossibleValue) {
         super();
         Preconditions.checkNotNull(bidders2);
         Preconditions.checkArgument(bidders2.size() > 0);
         Preconditions.checkArgument(biggestPossibleValue <= MIP.MAX_VALUE);
         this.biggestPossibleValue = biggestPossibleValue;
-        this.scalingFactor = scalingFactor;
         this.bidders = Collections.unmodifiableSet(new HashSet<>(bidders2));
         world = bidders2.iterator().next().getWorld();
         Preconditions.checkNotNull(world);
@@ -187,10 +184,4 @@ public class MRVMWorldPartialMip extends PartialMIP {
         return biggestPossibleValue;
     }
 
-    /**
-     * @return
-     */
-    public double getScalingFactor() {
-        return scalingFactor;
-    }
 }

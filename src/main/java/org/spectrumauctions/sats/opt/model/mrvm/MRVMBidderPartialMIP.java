@@ -41,12 +41,12 @@ public abstract class MRVMBidderPartialMIP extends PartialMIP {
     protected final MRVMWorldPartialMip worldPartialMip;
     private final MRVMBidder bidder;
 
-    private final double svscaling;
+    private final double scaling;
 
     public MRVMBidderPartialMIP(MRVMBidder bidder, double scalingFactor, MRVMWorldPartialMip worldMip) {
         this.bidder = bidder;
         this.worldPartialMip = worldMip;
-        this.svscaling = scalingFactor;
+        this.scaling = scalingFactor;
         initVariables();
     }
 
@@ -199,7 +199,7 @@ public abstract class MRVMBidderPartialMIP extends PartialMIP {
         for (Region region : bidder.getWorld().getRegionsMap().getRegions()) {
             double beta = bidder.getBeta(region).doubleValue();
             double population = region.getPopulation();
-            double scaledFactor = beta * population / svscaling;
+            double scaledFactor = beta * population / scaling;
             Constraint omega = new Constraint(CompareType.EQ, 0);
             omega.addTerm(-1, getOmegaVariable(region));
             omega.addTerm(scaledFactor, getSVVariable(region));
@@ -316,7 +316,7 @@ public abstract class MRVMBidderPartialMIP extends PartialMIP {
     }
 
 
-    public double getSVScalingFactor() {
-        return svscaling;
+    public double getScalingFactor() {
+        return scaling;
     }
 }
