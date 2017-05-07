@@ -22,6 +22,7 @@ import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 /**
  * @author Michael Weiss
@@ -39,10 +40,14 @@ public class MRVM_MIP implements EfficientAllocator<GenericAllocation<MRVMGeneri
      */
     private MRVMWorldPartialMip worldPartialMip;
     private Map<MRVMBidder, MRVMBidderPartialMIP> bidderPartialMips;
+    private Optional<AggregationLimitPartialMip> aggregationLimitPartialMip;
     private MRVMWorld world;
     private MIP mip;
 
-    public MRVM_MIP(Collection<MRVMBidder> bidders) {
+
+    //TODO Implement a more generic way to encode aggregation limits, suitable for non-default model instances, too.
+
+    public MRVM_MIP(Collection<MRVMBidder> bidders, boolean useDefaultModelAggregationLimits){
         Preconditions.checkNotNull(bidders);
         Preconditions.checkArgument(bidders.size() > 0);
         world = bidders.iterator().next().getWorld();
@@ -70,6 +75,17 @@ public class MRVM_MIP implements EfficientAllocator<GenericAllocation<MRVMGeneri
             bidderPartialMIP.appendToMip(mip);
             bidderPartialMips.put(bidder, bidderPartialMIP);
         }
+        if(useDefaultModelAggregationLimits){
+            AggregationLimitPartialMip aggregationLimitPartialMip = new AggregationLimitPartialMip(bidders, worldPartialMip);
+            aggregationLimitPartialMip.appendToMip(mip);
+            this.aggregationLimitPartialMip = Optional.of(aggregationLimitPartialMip);
+        }else {
+            aggregationLimitPartialMip = Optional.empty();
+        }
+    }
+
+    public MRVM_MIP(Collection<MRVMBidder> bidders) {
+        this(bidders, true);
     }
 
 
