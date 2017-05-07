@@ -123,8 +123,9 @@ public class WorldPartialMip extends PartialMIP {
 
     private void appendObjectiveToMip(MIP mip){
         mip.setObjectiveMax(true);
-        if(mip.getObjectiveTerms().size() != 0){
-            //TODO Log Warning
+        if ((mip.getLinearObjectiveTerms() != null && mip.getQuadraticObjectiveTerms() != null)
+                || mip.getObjectiveTerms().size() != 0) {
+            System.out.println("WARNING: There are already existing objective values, when there's still supposed to be none");
         }
         for(Variable var : valueVariables.values()){
             mip.addObjectiveTerm(1, var);
