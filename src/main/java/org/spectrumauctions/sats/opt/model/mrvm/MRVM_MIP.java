@@ -48,6 +48,7 @@ public class MRVM_MIP implements EfficientAllocator<GenericAllocation<MRVMGeneri
         world = bidders.iterator().next().getWorld();
         mip = new MIP();
         mip.setSolveParam(SolveParam.RELATIVE_OBJ_GAP, 0.001);
+        mip.setSolveParam(SolveParam.DISPLAY_OUTPUT, false);
         double scalingFactor = Scalor.scalingFactor(bidders);
         double biggestPossibleValue = Scalor.biggestUnscaledPossibleValue(bidders).doubleValue() / scalingFactor;
         this.worldPartialMip = new MRVMWorldPartialMip(
